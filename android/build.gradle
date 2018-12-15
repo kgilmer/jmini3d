@@ -11,11 +11,8 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
-
-// apply plugin: 'com.github.dcendents.android-maven'
-
-group='com.github.kgilmer'
+apply plugin: 'maven'
+apply plugin: 'com.github.dcendents.android-maven'
 
 dependencies {
     api project(':core')
