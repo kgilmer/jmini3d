@@ -15,7 +15,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
-archivesBaseName = 'jmini3d-android'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.kgilmer'
 
 dependencies {
     api project(':core')

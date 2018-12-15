@@ -1,10 +1,5 @@
 allprojects {
-    project.group = 'com.mobialia'
-    project.version = '0.9.3'
-
     repositories {
-        mavenLocal()
-        maven { url 'https://dl.bintray.com/mobialia/maven' }
         jcenter()
         google()
     }
@@ -18,5 +13,6 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:3.2.1"
+        classpath "com.github.dcendents:android-maven-gradle-plugin:2.1"
     }
 }
