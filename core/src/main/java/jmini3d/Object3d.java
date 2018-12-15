@@ -21,6 +21,7 @@ public class Object3d {
 	public float[] normalMatrix = new float[9];
 
 	public float rotationMatrix[];
+	private String name;
 	private float scaleMatrix[];
 	private float[] translationMatrix = new float[16];
 
@@ -31,17 +32,20 @@ public class Object3d {
 	protected boolean needsMatrixUpdate = true;
 
 	public Object3d() {
-		this(new VariableGeometry(0, 0), new Material(), null);
+		this("", new VariableGeometry(0, 0), new Material(), null);
 	}
 
 	public Object3d(Geometry geometry3d, Material material) {
-		this(geometry3d, material, null);
+		this("", geometry3d, material, null);
 	}
 
-	public Object3d(Geometry geometry3d, Material material, VertexColors vertexColors) {
+	public Object3d(Geometry geometry3d, Material material, VertexColors vertexColors) { this("", geometry3d, material, vertexColors); }
+
+	public Object3d(String name, Geometry geometry3d, Material material, VertexColors vertexColors) {
 		this.geometry3d = geometry3d;
 		this.material = material;
 		this.vertexColors = vertexColors;
+		this.name = name;
 
 		position = new Vector3();
 		children = new ArrayList<>();
@@ -170,6 +174,10 @@ public class Object3d {
 
 	public VertexColors getVertexColors() {
 		return vertexColors;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setVertexColors(VertexColors vertexColors) {
