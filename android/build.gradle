@@ -7,13 +7,11 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
 
 apply plugin: 'com.github.dcendents.android-maven'
 
@@ -40,37 +38,3 @@ copyResources {
 }
 
 preBuild.dependsOn copyResources
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from 'src/main/java'
-}
-
-publishToMavenLocal.dependsOn 'assembleRelease'
-bintrayUpload.dependsOn 'assembleRelease'
-
-publishing {
-    publications {
-        jmini3dAndroid(MavenPublication) {
-            artifactId = 'jmini3d-android'
-            artifact sourcesJar
-            artifact('build/outputs/aar/jmini3d-android-release.aar')
-        }
-    }
-}
-
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-    publications = ['jmini3dAndroid']
-    pkg {
-        repo = 'maven'
-        name = 'com.mobialia.jmini3d-android'
-        desc = 'Minimalistic OpenGL2 3D engine for mobile apps that supports Android and GWT'
-        userOrg = 'mobialia'
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/albertoruibal/jmini3d.git'
-        githubRepo = 'albertoruibal/jmini3d'
-        publish = true
-    }
-}
