@@ -1,7 +1,7 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'maven'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -9,10 +9,15 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 
-artifacts {
-    archives sourcesJar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
 dependencies {
     compile project(':core')
 }
